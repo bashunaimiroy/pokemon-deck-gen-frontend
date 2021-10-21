@@ -1,0 +1,20 @@
+@import '../base/buttons.scss';
+
+.form {
+    &__fieldset {
+
+    }
+    &__label {
+        @media all and (max-width: 375px){
+            display: block;
+        }
+        margin-right: 16px;
+    }
+    &__select, &__input {
+
+    }
+
+    &__controls {
+        margin-top: 16px;
+    }
+}

@@ -1,0 +1,10 @@
+@import '../base/utilities.scss';
+
+.deck-page {
+    &__card-lists {
+        @media all and (min-width: 768px){
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}

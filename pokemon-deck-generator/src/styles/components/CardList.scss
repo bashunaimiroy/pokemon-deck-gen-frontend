@@ -1,0 +1,13 @@
+@import "../base/utilities.scss";
+
+.card-list {
+    @include bare-list;
+    &__item {
+        margin: 4px 0;
+    }
+    &__show-button {
+        @include bare-button;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}

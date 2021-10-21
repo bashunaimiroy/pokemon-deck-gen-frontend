@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import CardDetails from './CardDetails'
-import '../styles/DeckPage.scss'
+import '../styles/components/DeckPage.scss'
 
 export default function DeckPage() {
     let { id } = useParams();
@@ -18,6 +18,7 @@ export default function DeckPage() {
                 setInclusions(response.data.inclusions)
             })
     }, [])
+
 
     return (
         <div>

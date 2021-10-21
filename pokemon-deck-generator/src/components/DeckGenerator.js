@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import pokemonTypes from "../constants/pokemonTypes";
-import '../styles/DeckGenerator.scss'
+import '../styles/components/DeckGenerator.scss'
 
 export default function DeckGenerator() {
     const [isLoading, setLoadingState] = useState(false)
@@ -36,21 +36,23 @@ export default function DeckGenerator() {
       <div>
         <h2>Deck Generator</h2>
         {shouldDisplayForm &&
-            <form onSubmit={handleFormSubmit}>
-                <fieldset>
-                    <label htmlFor="pokemon_type">Select Pokemon Type</label>
+            <form class="form" onSubmit={handleFormSubmit}>
+                <fieldset class="form__fieldset">
+                    <label class="form__label" htmlFor="pokemon_type">Select Pokemon Type</label>
                     <select id="pokemon_type" value={pokemonType} onChange={e => setPokemonType(e.target.value)}>
                         {pokemonTypes.map(type => <option key={type} value={type}>{type}</option>)}
                     </select>
                 </fieldset>
-                <fieldset>
-                    <label htmlFor="number_of_cards">Select number of Pokemon Cards in deck</label>
+                <fieldset class="form__fieldset">
+                    <label class="form__label" htmlFor="number_of_cards">Select number of Pokemon Cards in deck</label>
                     <input id="number_of_cards" type="range" min="12" max="16" value={numberOfPokemon} onChange={e => setNumberOfPokemon(e.target.value)}>
 
                     </input>
                     <strong>{numberOfPokemon}</strong>
                 </fieldset>
-                <button type="submit">Generate Deck</button>
+                <div class="form__controls">
+                    <button class="btn btn--primary" type="submit">Generate Deck</button>
+                </div>
             </form>
         }
         {shouldDisplayDeck &&

@@ -1,0 +1,23 @@
+@import '../base/colors.scss';
+@import '../base/utilities.scss';
+
+.navbar {
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid grey;
+    padding: 16px;
+    background: $color--background-1;
+
+    &__links {
+        @include bare-list;
+        display: flex;
+    }
+
+    &__link {
+        margin-right: 16px;
+        color: $color--primary;
+        & a:visited {
+            color: inherit;
+        }
+    }
+}
