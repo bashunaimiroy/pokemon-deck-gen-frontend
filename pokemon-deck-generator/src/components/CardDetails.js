@@ -1,9 +1,54 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 import '../styles/components/CardDetails.scss'
+    const extractRelevantPropertyRows = (card) => {
+        let props = [
+        {
+            label: "Card Type",
+            value: card.supertype
+        },
+        {
+            label: "Rules Text",
+            value: card.rules && card.rules.join('\n') | "N/A"
+        },
+        {
+            label: "Rarity",
+            value: card.rarity
+        },
+        {
+            label: "Series",
+            value: card.set.series
+        },
+        {
+            label: "Set",
+            value: card.set.name
+        },
+
+    ]
+    if (card.superType === "Pokémon") {
+        const pokemonProps = [
+            {
+                label: "Evolves From",
+                value: card.evolvesFrom
+            },
+            {
+                label: "Pokemon Type",
+                value: card.types.join(","),
+            },
+            {
+                label: "HP",
+                value: card.hp
+            },
+        ]
+        props = props.concat(pokemonProps)
+    }
+    return props;
+}
+
 
 export default function CardDetails({ cardId }) {
     const [cardData, setCardData] = useState({})
+    const [cardPropertyRows, setCardPropertyRows] = useState([])
     const [isLoading, setLoadingState] = useState(false);
 
     useEffect(() => {
@@ -14,6 +59,7 @@ export default function CardDetails({ cardId }) {
             .then(response => {
                 setLoadingState(false);
                 setCardData(response.data.card)
+                setCardPropertyRows(extractRelevantPropertyRows(response.data.card))
             })
     }, [cardId])
 
@@ -24,10 +70,24 @@ export default function CardDetails({ cardId }) {
     }
     if (cardData) {
         return (
-            <div class="card-details">
-                <h3> {cardData.name} </h3>
-                <img src={cardData.images && cardData.images.small} alt={cardData.name} />
-            </div>
+            <article className="card-details">
+                <header>
+                    <h4> {cardData.name} </h4>
+                </header>
+                <img className="card-details__img" src={cardData.images && cardData.images.small} alt={cardData.name} />
+                <h5>Card Details</h5>
+                <table className="card-details__table">
+                    <tbody>
+                    {cardPropertyRows.map(property => (
+                        <tr>
+                            <td className="card-details__property-label">{property.label}</td>
+                            <td className="card-details__property-value">{property.value}</td>
+                        </tr>
+                    )
+                    )}
+                    </tbody>
+                </table>
+            </article>
         )
     }
     return false
