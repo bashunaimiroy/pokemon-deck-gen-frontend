@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import pokemonTypes from "../constants/pokemonTypes"
+import '../styles/components/DeckList.scss'
+
 
 export default function DeckList() {
     
@@ -32,8 +34,8 @@ export default function DeckList() {
     return (
       <div>
         <h2>Decks</h2>
-        <div>
-          <label htmlFor="filter_by_pokemon_type">Filter By Pokemon Type</label>
+        <div class="deck-list__filters">
+          <label class="form__label" htmlFor="filter_by_pokemon_type">Filter By Pokemon Type</label>
           <select id="filter_by_pokemon_type" value={pokemonTypeFilter} onChange={e => setPokemonTypeFilter(e.target.value)}>
               <option value="">All Types</option>
               {pokemonTypes.map(type => <option key={type} value={type}>{type}</option>)}

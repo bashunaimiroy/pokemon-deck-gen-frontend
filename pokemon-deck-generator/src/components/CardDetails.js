@@ -9,7 +9,7 @@ import '../styles/components/CardDetails.scss'
         },
         {
             label: "Rules Text",
-            value: card.rules && card.rules.join('\n') || "N/A"
+            value: (card.rules && card.rules.map(rule => <p>{rule}</p>)) || "N/A"
         },
         {
             label: "Rarity",
@@ -29,7 +29,7 @@ import '../styles/components/CardDetails.scss'
         const pokemonProps = [
             {
                 label: "Evolves From",
-                value: card.evolves_from
+                value: card.evolves_from || "None"
             },
             {
                 label: "Pokemon Type",
@@ -72,21 +72,17 @@ export default function CardDetails({ cardId }) {
         return (
             <article className="card-details">
                 <header>
-                    <h4> {cardData.name} </h4>
+                    <h4 class="card-details__top-heading"> {cardData.name} </h4>
                 </header>
                 <img className="card-details__img" src={cardData.images && cardData.images.small} alt={cardData.name} />
-                <h5>Card Details</h5>
-                <table className="card-details__table">
-                    <tbody>
+                <h5 class="card-details__details-header">Card Details</h5>
                     {cardPropertyRows.map(property => (
-                        <tr key={property.label}>
-                            <td className="card-details__property-label">{property.label}</td>
-                            <td className="card-details__property-value">{property.value}</td>
-                        </tr>
+                        <div key={property.label}>
+                            <h6 className="card-details__property-label">{property.label}</h6>
+                            <div className="card-details__property-value">{property.value}</div>
+                        </div>
                     )
                     )}
-                    </tbody>
-                </table>
             </article>
         )
     }
