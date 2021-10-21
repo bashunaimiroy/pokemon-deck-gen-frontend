@@ -8,15 +8,15 @@ import CardDetails from './CardDetails'
 export default function DeckPage() {
     let { id } = useParams();
 
-    const [currentCardId, expandCardDetails] = useState(null)
-    const [cards, setCards] = useState([])
+    const [currentCardId, showCardDetails] = useState(null)
+    const [inclusions, setInclusions] = useState([])
     const [deck, setDeck] = useState({})
 
     useEffect(() => {
         axios.get('http://127.0.0.1:3000/v1/decks/' + id)
             .then(response => {
-                setCards(response.data.cards)
                 setDeck(response.data.deck)
+                setInclusions(response.data.inclusions)
             })
     }, [])
 
@@ -28,8 +28,9 @@ export default function DeckPage() {
             <section>
                 <h2>Deck Details for {id}</h2>
                 <p> This deck is a {deck.pokemon_type} type deck </p>
+                <h3>Cards in Deck</h3>
                 <ul>
-                    {cards.map(card => <li key={card.id}>{card.quantity}x <button onClick={() => expandCardDetails(card.id)}>{card.name}</button> - {card.supertype} </li>)}
+                    {inclusions.map(inclusion => <li key={inclusion.card_id}>{inclusion.quantity}x <button onClick={() => showCardDetails(inclusion.card_id)}>{inclusion.card_name}</button> - {inclusion.card_supertype} </li>)}
                 </ul>
             </section>
         </div>
