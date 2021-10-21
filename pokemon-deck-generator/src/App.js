@@ -1,13 +1,13 @@
 import React from "react";
 import DeckList from "./components/DeckList";
-import Generator from "./components/Generator";
+import DeckGenerator from "./components/DeckGenerator";
 import HomePage from "./components/HomePage";
+import NavBar from "./components/NavBar";
 
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import DeckPage from "./components/DeckPage";
   
@@ -15,28 +15,16 @@ import DeckPage from "./components/DeckPage";
     return (
       <Router>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/deckList">DeckList</Link>
-            </li>
-            <li>
-              <Link to="/generator">Generator</Link>
-            </li>
-          </ul>
-  
-          <hr />
+          <NavBar/>
           <Switch>
             <Route exact path="/">
               <HomePage />
             </Route>
-            <Route path="/deckList">
+            <Route path="/deck-list">
               <DeckList />
             </Route>
-            <Route path="/generator">
-              <Generator />
+            <Route path="/deck-generator">
+              <DeckGenerator />
             </Route>
             <Route path="/decks/:id">
               <DeckPage />

@@ -2,8 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import pokemonTypes from "../constants/pokemonTypes";
+import '../styles/DeckGenerator.scss'
 
-export default function Generator() {
+export default function DeckGenerator() {
     const [isLoading, setLoadingState] = useState(false)
     const [deck, setDeck] = useState(null)
     const [pokemonType, setPokemonType] = useState(pokemonTypes[0])
@@ -33,7 +34,7 @@ export default function Generator() {
     const shouldDisplayForm = !isLoading && !deck;
     return (
       <div>
-        <h2>Generator</h2>
+        <h2>Deck Generator</h2>
         {shouldDisplayForm &&
             <form onSubmit={handleFormSubmit}>
                 <fieldset>
@@ -61,7 +62,7 @@ export default function Generator() {
             </div>
         }
         {shouldDisplayLoader &&
-            <div>Loading...</div>
+            <div>Generating a {pokemonType}-type deck with { numberOfPokemon } Pokemon in it...</div>
         }
 
       </div>
