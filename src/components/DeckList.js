@@ -35,8 +35,8 @@ export default function DeckList() {
     return (
       <div>
         <h2>Decks</h2>
-        <div class="deck-list__filters">
-          <label class="form__label" htmlFor="filter_by_pokemon_type">Filter By Pokemon Type</label>
+        <div className="deck-list__filters">
+          <label className="form__label" htmlFor="filter_by_pokemon_type">Filter By Pokemon Type</label>
           <select id="filter_by_pokemon_type" value={pokemonTypeFilter} onChange={e => setPokemonTypeFilter(e.target.value)}>
               <option value="">All Types</option>
               {pokemonTypes.map(type => <option key={type} value={type}>{type}</option>)}
