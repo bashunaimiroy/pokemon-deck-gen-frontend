@@ -1,4 +1,5 @@
 @import "../base/utilities.scss";
+@import "../base/colors.scss";
 
 .card-list {
     @include bare-list;
@@ -9,5 +10,6 @@
         @include bare-button;
         text-decoration: underline;
         cursor: pointer;
+        color: $color--secondary;
     }
 }

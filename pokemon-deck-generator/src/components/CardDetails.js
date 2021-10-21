@@ -24,7 +24,7 @@ export default function CardDetails({ cardId }) {
     }
     if (cardData) {
         return (
-            <div>
+            <div class="card-details">
                 <h3> {cardData.name} </h3>
                 <img src={cardData.images && cardData.images.small} alt={cardData.name} />
             </div>
