@@ -9,7 +9,7 @@ import '../styles/components/CardDetails.scss'
         },
         {
             label: "Rules Text",
-            value: card.rules && card.rules.join('\n') | "N/A"
+            value: card.rules && card.rules.join('\n') || "N/A"
         },
         {
             label: "Rarity",
@@ -25,11 +25,11 @@ import '../styles/components/CardDetails.scss'
         },
 
     ]
-    if (card.superType === "Pokémon") {
+    if (card.supertype === "Pokémon") {
         const pokemonProps = [
             {
                 label: "Evolves From",
-                value: card.evolvesFrom
+                value: card.evolves_from
             },
             {
                 label: "Pokemon Type",
@@ -79,7 +79,7 @@ export default function CardDetails({ cardId }) {
                 <table className="card-details__table">
                     <tbody>
                     {cardPropertyRows.map(property => (
-                        <tr>
+                        <tr key={property.label}>
                             <td className="card-details__property-label">{property.label}</td>
                             <td className="card-details__property-value">{property.value}</td>
                         </tr>
