@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
+import '../styles/CardDetails.scss'
 
 export default function CardDetails({ cardId }) {
     const [cardData, setCardData] = useState({})

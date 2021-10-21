@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import {
-    useParams
-} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import CardDetails from './CardDetails'
+import '../styles/DeckPage.scss'
 
 export default function DeckPage() {
     let { id } = useParams();
