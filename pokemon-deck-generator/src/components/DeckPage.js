@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Axios from 'axios'
+import axios from 'axios'
 import {
     useParams
 } from 'react-router-dom'
@@ -13,10 +13,10 @@ export default function DeckPage() {
     const [deck, setDeck] = useState({})
 
     useEffect(() => {
-        Axios.get('http://127.0.0.1:3000/v1/decks/' + id)
+        axios.get('http://127.0.0.1:3000/v1/decks/' + id)
             .then(response => {
-                setCards(response.data.payload.cards)
-                setDeck(response.data.payload.deck)
+                setCards(response.data.cards)
+                setDeck(response.data.deck)
             })
     }, [])
 
