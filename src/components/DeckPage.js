@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import CardDetails from './CardDetails'
 import CardList from './CardList'
+import apiUrl from '../constants/api';
 import '../styles/components/DeckPage.scss'
 
 export default function DeckPage() {
@@ -13,7 +14,7 @@ export default function DeckPage() {
     const [deck, setDeck] = useState({})
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:3000/v1/decks/' + id)
+        axios.get(`${apiUrl}/decks/${id}`)
             .then(response => {
                 setDeck(response.data.deck)
                 setInclusions(response.data.inclusions)

@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import pokemonTypes from "../constants/pokemonTypes";
+import apiUrl from '../constants/api';
+
 import '../styles/components/DeckGenerator.scss'
 
 export default function DeckGenerator() {
@@ -22,7 +24,7 @@ export default function DeckGenerator() {
             pokemon_type: pokemonType,
             number_of_pokemon: numberOfPokemon
         }
-        axios.post('http://127.0.0.1:3000/v1/decks', postData)
+        axios.post(`${apiUrl}/decks`, postData)
             .then(response => {
                 setLoadingState(false)
                 handleGeneratedDeck(response.data.deck)

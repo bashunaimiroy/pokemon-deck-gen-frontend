@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 import '../styles/components/CardDetails.scss'
-    const extractRelevantPropertyRows = (card) => {
-        let props = [
+import apiUrl from '../constants/api';
+
+const extractRelevantPropertyRows = (card) => {
+    let props = [
         {
             label: "Card Type",
             value: card.supertype
@@ -55,7 +57,7 @@ export default function CardDetails({ cardId }) {
         console.log(cardId)
         if (!cardId) { return; }
         setLoadingState(true)
-        axios.get('http://127.0.0.1:3000/v1/cards/' + cardId)
+        axios.get(`${apiUrl}/cards/${cardId}`)
             .then(response => {
                 setLoadingState(false);
                 setCardData(response.data.card)
@@ -76,13 +78,13 @@ export default function CardDetails({ cardId }) {
                 </header>
                 <img className="card-details__img" src={cardData.images && cardData.images.small} alt={cardData.name} />
                 <h5 class="card-details__details-header">Card Details</h5>
-                    {cardPropertyRows.map(property => (
-                        <div key={property.label}>
-                            <h6 className="card-details__property-label">{property.label}</h6>
-                            <div className="card-details__property-value">{property.value}</div>
-                        </div>
-                    )
-                    )}
+                {cardPropertyRows.map(property => (
+                    <div key={property.label}>
+                        <h6 className="card-details__property-label">{property.label}</h6>
+                        <div className="card-details__property-value">{property.value}</div>
+                    </div>
+                )
+                )}
             </article>
         )
     }

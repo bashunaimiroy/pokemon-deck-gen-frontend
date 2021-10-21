@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import pokemonTypes from "../constants/pokemonTypes"
+import apiUrl from "../constants/api"
 import '../styles/components/DeckList.scss'
 
 
@@ -20,7 +21,7 @@ export default function DeckList() {
           params.filter_by_pokemon_type = pokemonTypeFilter
         }
 
-        axios.get('http://127.0.0.1:3000/v1/decks/', { params })
+        axios.get(`${apiUrl}/decks`, { params })
         .then(response => {
             setLoadingState(false)
             setDecks(response.data.decks.reverse())
