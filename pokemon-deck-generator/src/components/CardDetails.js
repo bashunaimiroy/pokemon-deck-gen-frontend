@@ -1,18 +1,26 @@
 import { useState, useEffect } from 'react';
-import Axios from 'axios'
+import axios from 'axios'
 
 export default function CardDetails({ cardId }) {
     const [cardData, setCardData] = useState({})
+    const [isLoading, setLoadingState] = useState(false);
 
     useEffect(() => {
         console.log(cardId)
         if (!cardId) { return; }
-        Axios.get('http://127.0.0.1:3000/v1/cards/' + cardId)
+        setLoadingState(true)
+        axios.get('http://127.0.0.1:3000/v1/cards/' + cardId)
             .then(response => {
-                setCardData(response.data.payload.card)
+                setLoadingState(false);
+                setCardData(response.data.card)
             })
     }, [cardId])
 
+    if (isLoading) {
+        return (
+            <div>Loading Card Details...</div>
+        )
+    }
     if (cardData) {
         return (
             <div>
