@@ -11,7 +11,7 @@ const extractRelevantPropertyRows = (card) => {
         },
         {
             label: "Rules Text",
-            value: (card.rules && card.rules.map(rule => <p>{rule}</p>)) || "N/A"
+            value: (card.rules && card.rules.map(rule => <p key={rule.slice(0,10)}>{rule}</p>)) || "N/A"
         },
         {
             label: "Rarity",
@@ -74,10 +74,10 @@ export default function CardDetails({ cardId }) {
         return (
             <article className="card-details">
                 <header>
-                    <h4 class="card-details__top-heading"> {cardData.name} </h4>
+                    <h4 className="card-details__top-heading"> {cardData.name} </h4>
                 </header>
                 <img className="card-details__img" src={cardData.images && cardData.images.small} alt={cardData.name} />
-                <h5 class="card-details__details-header">Card Details</h5>
+                <h5 className="card-details__details-header">Card Details</h5>
                 {cardPropertyRows.map(property => (
                     <div key={property.label}>
                         <h6 className="card-details__property-label">{property.label}</h6>
