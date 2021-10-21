@@ -1,21 +1,30 @@
 import { useState, useEffect } from 'react';
-import Axios from 'axios'
-import { Link } from 'react-router-dom';
 
+import axios from 'axios'
+import { Link } from 'react-router-dom';
+import pokemonTypes from "../constants/pokemonTypes"
 
 export default function DeckList() {
     
     const [isLoading, setLoadingState] = useState(false)
+    const [pokemonTypeFilter, setPokemonTypeFilter] = useState("")
     const [decks, setDecks] = useState([])
 
     useEffect(() => {
-        Axios.get('http://127.0.0.1:3000/v1/decks/')
         setLoadingState(true)
+        
+        const params = {}
+        if (pokemonTypeFilter){
+          params.filter_by_pokemon_type = pokemonTypeFilter
+        }
+
+        axios.get('http://127.0.0.1:3000/v1/decks/', { params })
         .then(response => {
-            setDecks(response.data.payload.decks.reverse())
             setLoadingState(false)
+            setDecks(response.data.decks.reverse())
         })
-    }, [])    
+    }, [pokemonTypeFilter])    
+
     const shouldDisplayDecks = !isLoading && !!decks.length;
     const shouldDisplayLoader = isLoading;
     const displayNoDecksFound = !isLoading && !decks.length;
@@ -23,11 +32,13 @@ export default function DeckList() {
     return (
       <div>
         <h2>Decks</h2>
-        <ul>
-            {decks.map((deck) => <li key={deck.id}>
-                <Link to={`/decks/${deck.id}`}>Deck #{deck.id}</Link>
-            </li>)}
-        </ul>
+        <div>
+          <label htmlFor="filter_by_pokemon_type">Filter By Pokemon Type</label>
+          <select id="filter_by_pokemon_type" value={pokemonTypeFilter} onChange={e => setPokemonTypeFilter(e.target.value)}>
+              <option value="">All Types</option>
+              {pokemonTypes.map(type => <option key={type} value={type}>{type}</option>)}
+          </select>
+        </div>
         {
           shouldDisplayLoader && 
           <div>Loading Decks...</div>
