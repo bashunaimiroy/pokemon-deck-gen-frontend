@@ -1,3 +1,23 @@
+@import "../base/colors.scss";
+
+
 .card-details {
     padding: 0 16px;
+
+    &__table {
+        background: $color--background-1;
+        border: 1px solid transparent;
+        table-layout: fixed;
+      }
+      
+      th,
+      td {
+        border: 1px solid black;
+        width: 100px;
+        overflow: hidden;
+      }
+    &__property-label {
+        font-weight: bold;
+    }
+
 }
