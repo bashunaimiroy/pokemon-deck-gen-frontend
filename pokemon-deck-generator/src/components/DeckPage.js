@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import CardDetails from './CardDetails'
+import CardList from './CardList'
 import '../styles/components/DeckPage.scss'
 
 export default function DeckPage() {
@@ -19,6 +20,9 @@ export default function DeckPage() {
             })
     }, [])
 
+    const pokemonCardInclusions = inclusions.filter(inclusion => inclusion.card_supertype === 'Pokémon')
+    const trainerCardInclusions = inclusions.filter(inclusion => inclusion.card_supertype === 'Trainer')
+    const energyCardInclusions = inclusions.filter(inclusion => inclusion.card_supertype === 'Energy')
 
     return (
         <div>
@@ -28,10 +32,24 @@ export default function DeckPage() {
             <section>
                 <h2>Deck Details for {id}</h2>
                 <p> This deck is a {deck.pokemon_type} type deck </p>
-                <h3>Cards in Deck</h3>
-                <ul>
-                    {inclusions.map(inclusion => <li key={inclusion.card_id}>{inclusion.quantity}x <button onClick={() => showCardDetails(inclusion.card_id)}>{inclusion.card_name}</button> - {inclusion.card_supertype} </li>)}
-                </ul>
+                <section>
+                    <h3>Cards in Deck</h3>
+                    <div class="deck-page__card-lists">
+                        <div>
+                            <h4>Pokemon Cards</h4>
+                            <CardList inclusions={pokemonCardInclusions} showCardDetails={showCardDetails}></CardList>
+                        </div>
+                        <div>
+                            <h4>Trainer Cards</h4>
+                            <CardList inclusions={trainerCardInclusions} showCardDetails={showCardDetails}></CardList>
+                        </div>
+                        <div>
+                            <h4>Energy Cards</h4>
+                            <CardList inclusions={energyCardInclusions} showCardDetails={showCardDetails}></CardList>
+                        </div>
+                    </div>
+                </section>
+        
             </section>
         </div>
     );
