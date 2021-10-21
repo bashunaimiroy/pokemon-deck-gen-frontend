@@ -36,22 +36,22 @@ export default function DeckGenerator() {
       <div>
         <h2>Deck Generator</h2>
         {shouldDisplayForm &&
-            <form class="form" onSubmit={handleFormSubmit}>
-                <fieldset class="form__fieldset">
-                    <label class="form__label" htmlFor="pokemon_type">Select Pokemon Type</label>
+            <form className="form" onSubmit={handleFormSubmit}>
+                <fieldset className="form__fieldset">
+                    <label className="form__label" htmlFor="pokemon_type">Select Pokemon Type</label>
                     <select id="pokemon_type" value={pokemonType} onChange={e => setPokemonType(e.target.value)}>
                         {pokemonTypes.map(type => <option key={type} value={type}>{type}</option>)}
                     </select>
                 </fieldset>
-                <fieldset class="form__fieldset">
-                    <label class="form__label" htmlFor="number_of_cards">Select number of Pokemon Cards in deck</label>
+                <fieldset className="form__fieldset">
+                    <label className="form__label" htmlFor="number_of_cards">Select number of Pokemon Cards in deck</label>
                     <input id="number_of_cards" type="range" min="12" max="16" value={numberOfPokemon} onChange={e => setNumberOfPokemon(e.target.value)}>
 
                     </input>
                     <strong>{numberOfPokemon}</strong>
                 </fieldset>
-                <div class="form__controls">
-                    <button class="btn btn--primary" type="submit">Generate Deck</button>
+                <div className="form__controls">
+                    <button className="btn btn--primary" type="submit">Generate Deck</button>
                 </div>
             </form>
         }

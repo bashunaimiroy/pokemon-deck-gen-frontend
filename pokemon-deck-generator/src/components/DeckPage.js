@@ -25,14 +25,14 @@ export default function DeckPage() {
     const energyCardInclusions = inclusions.filter(inclusion => inclusion.card_supertype === 'Energy')
 
     return (
-        <div class="deck-page">
+        <div className="deck-page">
             <section>
                 <h2>Deck #{id}</h2>
                 <h3>Deck Type</h3>
                 <p>{deck.pokemon_type}</p>
                 <section>
                     <h3>Cards in Deck</h3>
-                    <div class="deck-page__card-lists">
+                    <div className="deck-page__card-lists">
                         <div>
                             <h4>Pokemon Cards</h4>
                             <CardList inclusions={pokemonCardInclusions} showCardDetails={showCardDetails}></CardList>
@@ -49,8 +49,11 @@ export default function DeckPage() {
                 </section>
 
             </section>
-            <section class="deck-page__card-details">
-                <CardDetails cardId={currentCardId}></CardDetails>
+            <section className="deck-page__card-details">
+                {
+                    currentCardId &&
+                    <CardDetails cardId={currentCardId}></CardDetails>
+                }
             </section>
         </div>
     );
